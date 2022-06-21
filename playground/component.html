@@ -9,10 +9,15 @@
 <body>
     <div id="app">
         <app-header></app-header>
-        <app-content></app-content>
         <app-footer></app-footer>
     </div>
-     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app2">
+        <app-header></app-header>
+        <app-footer></app-footer>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         //전역 컴포넌트
        //Vue.component('컴포넌트 이름',컴포넌트 내용);
@@ -20,21 +25,26 @@
             template : '<h1>Header</h1>'
         });
 
-        Vue.component('app-content',{
-            template : '<p>우와 신기하다.</p>'
-        });
-        //new Vue(); - 인스턴스 생성자 함수
-
-
         new Vue({
             el : '#app',
             components:{
-                //지역 컴포넌트 등록 방식
+                //지역 컴포넌트 등록 방식 components(뒤에 's'가 붙음)
                 //'컴포넌트 이름' : '컴포넌트 내용',
                 'app-footer' : {
                     template : '<footer>하단 풋터</footer>'
                 }
 
+            }
+        });
+
+        //전역 컴포넌트는 외부에 있기때문에 인스턴스를 생성하고 호출이 자유롭지만
+        //지역 컴포넌트는 내부에 있기때문에 다른 인스턴스 안에 생성되어있는것을 호출할 수 는 없다.
+        new Vue({
+            el : '#app2',
+            components:{
+                'app-footer' : {
+                    template : '<footer>하단 풋터</footer>'
+                }
             }
         });
     </script>
